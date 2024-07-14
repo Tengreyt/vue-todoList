@@ -1,30 +1,49 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+    <div class="app">
+        <post-form  
+        @create="createPost"/>
+        <post-list :posts="posts"/>
+    </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+
+import PostForm from './components/PostForm.vue'
+import PostList from './components/PostList.vue'
+export default {
+    components : {
+        PostForm, PostList
+    },
+    data() {
+        return {
+            posts: [
+                {id:1, title: ' Javascrips 1', body: ' Описания поста 1'},
+                {id:2, title: ' Javascrips 2', body: ' Описания поста 2'},
+                {id:3, title: ' Javascrips 3', body: ' Описания поста 3'},
+                {id:4, title: ' Javascrips 4', body: ' Описания поста 4'},
+            ],
+           
+        }
+    },
+    methods: {
+        createPost(post) {
+           this.posts.push(post)
+        },
+        
+    }
 }
 
-nav {
-  padding: 30px;
+</script>
+
+<style scoped>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.app {
+    padding: 20px
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
